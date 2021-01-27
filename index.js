@@ -4,5 +4,5 @@ var inv = new LineSeparator.Inventory({
     4: Number.POSITIVE_INFINITY,
     5: Number.POSITIVE_INFINITY,
 });
-var line = LineSeparator.Line.calc(14.5, inv);
+var line = LineSeparator.Line.calc(19, inv);
 console.log(line, inv);

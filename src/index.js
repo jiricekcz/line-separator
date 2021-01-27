@@ -36,11 +36,11 @@ module.exports = {
                 var inv = inventory.duplicate();
                 inv.deinfinitify(constants.infinity);
                 var r = inventory.deinfinitify(constants.infinity);
+                inv.removeOne(l);
                 var halfInv = inv.half();
                 var nl = (length - l) / 2;
                 var side = this.calc(nl, halfInv);
                 halfInv = halfInv.multiply(2);
-                halfInv.removeOne(l);
                 odds.push({ l: new this(...side, new module.exports.LineSegment(l), ...side), inv: module.exports.Inventory.findUsed(inventory, halfInv) });
                 if (r) inventory.infinitify(constants.infinity);
             }
@@ -86,14 +86,12 @@ module.exports = {
         }
         normalize() {
             for (var h of this.keys()) {
-                if (this.get(h) < 1) this.delete(h);
                 this.set(h, Math.floor(this.get(h)));
             }
         }
         removeZeros() {
             for (var h of this.keys()) {
                 if (this.get(h) == 0) this.delete(h);
-                this.delete(h, Math.floor(this.get(h)));
             }
         }
         half() {
@@ -102,7 +100,6 @@ module.exports = {
                 n[h] = this.get(h) / 2;
             }
             var f = new module.exports.Inventory(n);
-            f.normalize();
             return f;
         }
         multiply(num) {
@@ -124,7 +121,6 @@ module.exports = {
         removeOne(key) {
             if (this.has(key)) {
                 this.set(key, this.get(key) - 1);
-
             } else this.set(key, -1);
         }
         addOne(key) {
