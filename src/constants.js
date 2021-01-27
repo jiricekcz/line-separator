@@ -1,0 +1,1 @@
+module.exports.infinity = 1e10;
